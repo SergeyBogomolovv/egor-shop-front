@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export default function Header() {
   return (
-    <header className="flex items-center justify-between py-4 sticky">
+    <header className="flex items-center justify-between py-4 md:my-6">
       <Link to="/">
         <h1 className="font-bold text-2xl">Ticket</h1>
       </Link>
