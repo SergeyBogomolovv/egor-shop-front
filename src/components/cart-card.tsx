@@ -14,12 +14,8 @@ interface Props {
   product: Product;
 }
 
-export default function ProductCard({ product }: Props) {
-  const products = useCartStore((store) => store.products);
-
-  const addToCart = useCartStore((store) => store.addProduct);
-
-  const authenticated = localStorage.getItem("token");
+export default function CartCard({ product }: Props) {
+  const removeFromCart = useCartStore((store) => store.removeProduct);
 
   return (
     <Card>
@@ -36,12 +32,10 @@ export default function ProductCard({ product }: Props) {
       </CardContent>
       <CardFooter>
         <Button
-          disabled={!authenticated || products.includes(product)}
-          onClick={() => addToCart(product)}
+          variant="destructive"
+          onClick={() => removeFromCart(product.id)}
         >
-          {authenticated
-            ? `В корзин${products.includes(product) ? "е ✓" : "у"}`
-            : "Авторизуйтесь"}
+          Удалить из корзины
         </Button>
       </CardFooter>
     </Card>
