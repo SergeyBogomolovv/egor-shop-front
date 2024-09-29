@@ -21,28 +21,23 @@ import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { $api } from "@/lib/api";
 import { toast } from "sonner";
-import { Checkbox } from "./ui/checkbox";
 
 const registerSchema = z.object({
   name: z.string(),
   password: z
     .string()
     .min(6, { message: "Пароль должен быть не короче 6 символов" }),
-  admin: z.any(),
 });
 
 export default function RegisterForm() {
   const form = useForm({
     resolver: zodResolver(registerSchema),
-    defaultValues: { name: "", password: "", admin: false },
+    defaultValues: { name: "", password: "" },
   });
 
   async function onSubmit(values: z.infer<typeof registerSchema>) {
     try {
-      const { data } = await $api.post("/auth/register", {
-        ...values,
-        role: values.admin ? "admin" : "user",
-      });
+      const { data } = await $api.post("/auth/register", values);
       toast.success(data.message);
     } catch (error) {
       form.setError("name", {
@@ -83,22 +78,6 @@ export default function RegisterForm() {
                   <FormControl>
                     <Input type="password" placeholder="******" {...field} />
                   </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="admin"
-              render={({ field }) => (
-                <FormItem className="flex items-end gap-2">
-                  <FormControl>
-                    <Checkbox
-                      checked={!!field.value}
-                      onCheckedChange={field.onChange}
-                    />
-                  </FormControl>
-                  <FormLabel>Админ?</FormLabel>
                   <FormMessage />
                 </FormItem>
               )}
