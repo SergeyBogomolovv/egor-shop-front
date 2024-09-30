@@ -8,10 +8,10 @@ import {
 } from "./ui/card";
 import { Button } from "./ui/button";
 import { useCartStore } from "@/store/cart.store";
-import { Product } from "@/lib/types";
+import { Ticket } from "@/lib/types";
 
 interface Props {
-  product: Product;
+  product: Ticket;
 }
 
 export default function CartCard({ product }: Props) {
@@ -23,13 +23,15 @@ export default function CartCard({ product }: Props) {
         <CardTitle>{product.title}</CardTitle>
         <CardDescription>{product.description}</CardDescription>
       </CardHeader>
-      <CardContent>
-        <img
-          className="rounded-lg aspect-video object-cover"
-          src={product.imageUrl}
-          alt={product.title}
-        />
-      </CardContent>
+      {product.imageUrl && (
+        <CardContent>
+          <img
+            className="rounded-lg aspect-video object-cover"
+            src={product.imageUrl}
+            alt={product.title}
+          />
+        </CardContent>
+      )}
       <CardFooter>
         <Button
           variant="destructive"

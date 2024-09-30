@@ -7,14 +7,14 @@ import {
   CardTitle,
 } from "./ui/card";
 import { Button } from "./ui/button";
-import { Product } from "@/lib/types";
+import { Ticket } from "@/lib/types";
 import { useMutation } from "@tanstack/react-query";
 import queryClient from "@/lib/query";
 import { toast } from "sonner";
 import { $api } from "@/lib/api";
 
 interface Props {
-  product: Product;
+  product: Ticket;
 }
 
 export default function AdminProductCard({ product }: Props) {

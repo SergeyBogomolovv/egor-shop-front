@@ -8,10 +8,10 @@ import {
 } from "./ui/card";
 import { Button } from "./ui/button";
 import { useCartStore } from "@/store/cart.store";
-import { Product } from "@/lib/types";
+import { Ticket } from "@/lib/types";
 
 interface Props {
-  product: Product;
+  product: Ticket;
 }
 
 export default function ProductCard({ product }: Props) {

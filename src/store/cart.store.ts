@@ -1,9 +1,9 @@
-import { Product } from "@/lib/types";
+import { Ticket } from "@/lib/types";
 import { create } from "zustand";
 
 interface CartState {
-  products: Product[];
-  addProduct: (product: Product) => void;
+  products: Ticket[];
+  addProduct: (product: Ticket) => void;
   removeProduct: (id: string) => void;
   clearCart: () => void;
 }

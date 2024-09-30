@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const productSchema = z.object({
+export const ticketSchema = z.object({
   id: z.string(),
   title: z.string(),
   price: z.string(),
@@ -8,7 +8,7 @@ export const productSchema = z.object({
   imageUrl: z.nullable(z.string()),
 });
 
-export type Product = z.infer<typeof productSchema>;
+export type Ticket = z.infer<typeof ticketSchema>;
 
 export type User = {
   id: string;
