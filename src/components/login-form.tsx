@@ -63,7 +63,7 @@ export default function LoginForm() {
                 <FormItem>
                   <FormLabel>Имя пользователя</FormLabel>
                   <FormControl>
-                    <Input placeholder="Егор" {...field} />
+                    <Input placeholder="Никита" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

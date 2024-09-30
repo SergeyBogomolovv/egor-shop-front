@@ -1,29 +1,24 @@
+import { useAuth } from "@/hooks/use-auth";
 import { Link } from "react-router-dom";
+import UserButton from "./user-button";
 
 export default function Header() {
-  const authenticated = localStorage.getItem("token");
+  const authenticated = useAuth();
 
   return (
     <header className="flex items-center justify-between py-4 md:my-6">
       <Link to="/">
-        <h1 className="font-bold text-2xl">Ticket</h1>
+        <h1 className="font-bold text-2xl">Poll creator</h1>
       </Link>
       <nav className="flex items-center gap-x-4">
-        <Link className="font-thin sm:text-lg text-sm" to="/about">
-          Про нас
+        <Link className="font-thin sm:text-lg text-sm" to="/polls">
+          Голосования
         </Link>
         {authenticated ? (
-          <>
-            <Link className="font-thin sm:text-lg text-sm" to="/cart">
-              Корзина
-            </Link>
-            <Link className="font-thin sm:text-lg text-sm" to="/admin">
-              Админ-панель
-            </Link>
-          </>
+          <UserButton />
         ) : (
           <Link className="font-thin sm:text-lg text-sm" to="/auth">
-            Вход | Регистрация
+            Вход
           </Link>
         )}
       </nav>

@@ -1,11 +1,10 @@
 import HomePage from "@/pages/home";
 import { createBrowserRouter } from "react-router-dom";
 import Layout from "./layout";
-import CartPage from "@/pages/cart";
-import AboutPage from "@/pages/about";
 import AuthPage from "@/pages/auth";
 import { adminLoader, authLoader, protectedLoader } from "./loaders";
-import AdminPage from "@/pages/admin";
+import CreatePage from "@/pages/create";
+import PollsPage from "@/pages/polls";
 
 const router = createBrowserRouter([
   {
@@ -13,10 +12,9 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       { index: true, element: <HomePage /> },
-      { path: "/about", element: <AboutPage /> },
-      { path: "/cart", element: <CartPage />, loader: protectedLoader },
+      { path: "/polls", element: <PollsPage />, loader: protectedLoader },
       { path: "/auth", element: <AuthPage />, loader: authLoader },
-      { path: "/admin", element: <AdminPage />, loader: adminLoader },
+      { path: "/create", element: <CreatePage />, loader: adminLoader },
       { path: "*", element: <HomePage /> },
     ],
   },

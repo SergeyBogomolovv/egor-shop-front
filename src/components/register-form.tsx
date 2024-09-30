@@ -39,6 +39,7 @@ export default function RegisterForm() {
     try {
       const { data } = await $api.post("/auth/register", values);
       toast.success(data.message);
+      form.reset();
     } catch (error) {
       form.setError("name", {
         type: "custom",
@@ -63,7 +64,7 @@ export default function RegisterForm() {
                 <FormItem>
                   <FormLabel>Имя пользователя</FormLabel>
                   <FormControl>
-                    <Input placeholder="Егор" {...field} />
+                    <Input placeholder="Никита" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

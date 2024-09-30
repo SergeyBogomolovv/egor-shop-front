@@ -12,7 +12,7 @@ export const protectedLoader = async () => {
 export const authLoader = async () => {
   const isAuthenticated = localStorage.getItem("token");
   if (isAuthenticated) {
-    throw redirect("/cart");
+    throw redirect("/polls");
   }
   return null;
 };
@@ -26,7 +26,7 @@ export const adminLoader = async () => {
   const user = decodeJwt(token) as { role: string; id: string };
 
   if (user?.role !== "admin") {
-    throw redirect("/");
+    throw redirect("/polls");
   }
 
   return null;
