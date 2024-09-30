@@ -1,4 +1,3 @@
-import { Product } from "@/lib/products";
 import {
   Card,
   CardContent,
@@ -9,6 +8,7 @@ import {
 } from "./ui/card";
 import { Button } from "./ui/button";
 import { useCartStore } from "@/store/cart.store";
+import { Product } from "@/lib/types";
 
 interface Props {
   product: Product;
@@ -26,7 +26,7 @@ export default function CartCard({ product }: Props) {
       <CardContent>
         <img
           className="rounded-lg aspect-video object-cover"
-          src={product.image}
+          src={product.imageUrl}
           alt={product.title}
         />
       </CardContent>

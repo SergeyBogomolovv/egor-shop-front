@@ -6,7 +6,7 @@ export default function CartPage() {
   const products = useCartStore((store) => store.products);
 
   return (
-    <main className="flex flex-col items-center gap-10">
+    <main className="flex flex-col items-center gap-10 flex-grow">
       <ProfileCard />
       {products.length === 0 && (
         <h1 className="text-3xl font-bold">Корзина пуста</h1>

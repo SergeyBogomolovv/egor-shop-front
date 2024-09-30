@@ -1,10 +1,10 @@
-import { Product } from "@/lib/products";
+import { Product } from "@/lib/types";
 import { create } from "zustand";
 
 interface CartState {
   products: Product[];
   addProduct: (product: Product) => void;
-  removeProduct: (id: number) => void;
+  removeProduct: (id: string) => void;
   clearCart: () => void;
 }
 

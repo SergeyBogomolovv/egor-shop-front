@@ -9,9 +9,7 @@ export default function Layout() {
       <Toaster />
       <div className="flex flex-col min-h-screen w-[90%] max-w-[1280px] mx-auto">
         <Header />
-        <div className="flex-grow">
-          <Outlet />
-        </div>
+        <Outlet />
         <Footer />
       </div>
     </>

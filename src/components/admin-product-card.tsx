@@ -7,18 +7,27 @@ import {
   CardTitle,
 } from "./ui/card";
 import { Button } from "./ui/button";
-import { useCartStore } from "@/store/cart.store";
 import { Product } from "@/lib/types";
+import { useMutation } from "@tanstack/react-query";
+import queryClient from "@/lib/query";
+import { toast } from "sonner";
+import { $api } from "@/lib/api";
 
 interface Props {
   product: Product;
 }
 
-export default function ProductCard({ product }: Props) {
-  const addToCart = useCartStore((store) => store.addProduct);
-  const cart = useCartStore((store) => store.products);
-
-  const authenticated = localStorage.getItem("token");
+export default function AdminProductCard({ product }: Props) {
+  const { mutate, isPending } = useMutation({
+    mutationFn: async () => $api.delete(`/tickets/${product.id}`),
+    onSuccess() {
+      queryClient.refetchQueries({ queryKey: ["tickets"] });
+      toast.success("Билет удален");
+    },
+    onError() {
+      toast.error("Ошибка удаления билета");
+    },
+  });
 
   return (
     <Card>
@@ -37,12 +46,11 @@ export default function ProductCard({ product }: Props) {
       )}
       <CardFooter>
         <Button
-          disabled={!authenticated || cart?.includes(product)}
-          onClick={() => addToCart(product)}
+          disabled={isPending}
+          onClick={() => mutate()}
+          variant="destructive"
         >
-          {authenticated
-            ? `В корзин${cart?.includes(product) ? "е ✓" : "у"}`
-            : "Авторизуйтесь"}
+          Удалить
         </Button>
       </CardFooter>
     </Card>
