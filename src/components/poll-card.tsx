@@ -32,7 +32,17 @@ interface Props {
 }
 
 const answerSchema = z.object({
-  answer: z.string().min(1, { message: "Ответ не может быть пустым" }),
+  answer1: z.string().min(1, { message: "Ответ не может быть пустым" }),
+  answer2: z.optional(
+    z.string().min(1, { message: "Ответ не может быть пустым" }),
+  ),
+  answer3: z.optional(
+    z.string().min(1, { message: "Ответ не может быть пустым" }),
+  ),
+  answer4: z.optional(
+    z.string().min(1, { message: "Ответ не может быть пустым" }),
+  ),
+  email: z.string().email(),
 });
 
 export default function PollCard({ poll, isAdmin }: Props) {
@@ -40,9 +50,6 @@ export default function PollCard({ poll, isAdmin }: Props) {
 
   const form = useForm<z.infer<typeof answerSchema>>({
     resolver: zodResolver(answerSchema),
-    defaultValues: {
-      answer: "",
-    },
   });
 
   const { mutate, isPending } = useMutation({
@@ -76,18 +83,75 @@ export default function PollCard({ poll, isAdmin }: Props) {
         <Card>
           <CardHeader>
             <CardTitle>{poll.title}</CardTitle>
-            <CardDescription>{poll.question}</CardDescription>
             <CardDescription>Проголосовали: {poll.answered}</CardDescription>
           </CardHeader>
           <CardContent>
             <FormField
               control={form.control}
-              name="answer"
+              name="answer1"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Ваш ответ</FormLabel>
+                  <FormLabel>{poll.question1}</FormLabel>
                   <FormControl>
                     <Input placeholder="Введите ответ" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            {poll.question2 && (
+              <FormField
+                control={form.control}
+                name="answer2"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>{poll.question2}</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Введите ответ" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            )}
+            {poll.question3 && (
+              <FormField
+                control={form.control}
+                name="answer3"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>{poll.question3}</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Введите ответ" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            )}
+            {poll.question4 && (
+              <FormField
+                control={form.control}
+                name="answer4"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>{poll.question4}</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Введите ответ" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            )}
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Email для связи</FormLabel>
+                  <FormControl>
+                    <Input placeholder="email@email.com" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
